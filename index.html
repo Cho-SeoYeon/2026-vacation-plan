@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>코딩닌자 ♥ 코딩끼끼의 풀빌라 다이어리</title>
+<meta name="description" content="9월 진천 풀빌라 1박2일 일정을 싸이월드 미니홈피 감성으로 담은 여행 다이어리">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#fff8ec;
+    --cream-2:#fff1da;
+    --ink:#3a2b22;
+    --ink-soft:#8a745f;
+    --pool:#2fb6c9;
+    --pool-deep:#1f8fa0;
+    --sky:#d8f2f6;
+    --coral:#ff8a65;
+    --coral-deep:#e8663f;
+    --forest:#5d8a6c;
+    --forest-deep:#3d5f48;
+    --forest-bg:#e4efdf;
+    --pink:#ff8fa3;
+    --line:rgba(58,43,34,0.14);
+    --card:#ffffff;
+    --shadow:0 10px 28px rgba(58,43,34,0.10);
+    --backdrop:rgba(40,30,22,0.45);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --cream:#211a15;
+      --cream-2:#291f18;
+      --ink:#f6ead9;
+      --ink-soft:#c2ac96;
+      --pool:#3fc6d8;
+      --pool-deep:#1b7a89;
+      --sky:#16323a;
+      --coral:#ff9c78;
+      --coral-deep:#d9603a;
+      --forest:#7bab8a;
+      --forest-deep:#3d5f48;
+      --forest-bg:#1c2a20;
+      --pink:#ff9fb2;
+      --line:rgba(246,234,217,0.14);
+      --card:#2c241d;
+      --shadow:0 10px 28px rgba(0,0,0,0.45);
+      --backdrop:rgba(10,8,6,0.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --cream:#211a15;
+    --cream-2:#291f18;
+    --ink:#f6ead9;
+    --ink-soft:#c2ac96;
+    --pool:#3fc6d8;
+    --pool-deep:#1b7a89;
+    --sky:#16323a;
+    --coral:#ff9c78;
+    --coral-deep:#d9603a;
+    --forest:#7bab8a;
+    --forest-deep:#3d5f48;
+    --forest-bg:#1c2a20;
+    --pink:#ff9fb2;
+    --line:rgba(246,234,217,0.14);
+    --card:#2c241d;
+    --shadow:0 10px 28px rgba(0,0,0,0.45);
+    --backdrop:rgba(10,8,6,0.6);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Gaegu','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+    padding:0 18px;
+  }
+  h1,h2,.brand,.dday-badge,.no-tag{font-family:'Do Hyeon','Apple SD Gothic Neo',sans-serif; font-weight:400;}
+  .page{max-width:640px;margin:0 auto;padding-block:28px 120px;}
+  img{max-width:100%;}
+
+  /* ---------- diary hero card ---------- */
+  .diary-card{
+    background:var(--card);
+    border:2px dashed var(--line);
+    border-radius:22px;
+    padding:24px 22px 28px;
+    box-shadow:var(--shadow);
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .diary-meta{
+    display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+    margin-bottom:14px;
+  }
+  .no-tag,.date-tag{
+    font-size:12px;
+    letter-spacing:.03em;
+    padding:5px 10px;
+    border:1px dashed var(--line);
+    border-radius:8px;
+    color:var(--ink-soft);
+    font-family:'Courier New',monospace;
+  }
+  .diary-card h1{
+    font-size:clamp(24px,6vw,32px);
+    line-height:1.35;
+    margin:6px 0 8px;
+    text-wrap:balance;
+  }
+  .heart{color:var(--pink);}
+  .hero-sub{
+    color:var(--ink-soft);
+    font-size:17px;
+    margin:0 0 16px;
+  }
+  .dday-badge{
+    display:inline-block;
+    background:var(--coral);
+    color:#fff7ee;
+    font-size:15px;
+    padding:6px 16px;
+    border-radius:999px;
+    letter-spacing:.02em;
+    box-shadow:0 4px 10px rgba(232,102,63,0.35);
+  }
+  .avatar-row{
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    gap:28px;
+    margin-top:22px;
+  }
+  .sprite-wrap{display:flex;flex-direction:column;align-items:center;gap:8px;}
+  .sprite-box{position:relative;}
+  .pixel-sprite{position:absolute;top:0;left:0;}
+  @media (prefers-reduced-motion: no-preference){
+    .sprite-box{animation:bob 2.4s ease-in-out infinite;}
+    .sprite-wrap:nth-child(2) .sprite-box{animation-delay:.4s;}
+  }
+  @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);}}
+  .avatar-label{font-size:15px;color:var(--ink-soft);}
+
+  /* ---------- zones ---------- */
+  main{display:flex;flex-direction:column;gap:18px;margin-top:22px;position:relative;}
+  .wanderer{
+    position:absolute;
+    left:0;top:0;
+    display:flex;
+    align-items:flex-end;
+    gap:6px;
+    z-index:5;
+    pointer-events:none;
+  }
+  .zone{
+    border-radius:22px;
+    padding:26px 22px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    isolation:isolate;
+  }
+  .zone h2{font-size:22px;margin:0 0 10px;}
+  .zone p{margin:0;font-size:17px;line-height:1.65;max-width:46ch;}
+  .zone-pool{background:linear-gradient(165deg,var(--sky),var(--pool) 120%);color:#0d3a42;}
+  .zone-pool h2,.zone-pool p{color:#0d3a42;}
+  .zone-pool::before,.zone-pool::after{
+    content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,0.4);z-index:-1;
+  }
+  .zone-pool::before{width:120px;height:120px;top:-40px;right:-30px;}
+  .zone-pool::after{width:70px;height:70px;bottom:-20px;right:70px;background:rgba(255,255,255,0.25);}
+  .wave{position:absolute;left:0;right:0;bottom:0;height:34px;z-index:-1;}
+  .wave path{fill:rgba(255,255,255,0.35);}
+
+  .zone-bbq{background:linear-gradient(160deg,var(--cream-2),var(--coral) 135%);}
+  .zone-bbq h2,.zone-bbq p{color:#4a2416;}
+  :root[data-theme="dark"] .zone-bbq h2,:root[data-theme="dark"] .zone-bbq p{color:#3a1c10;}
+  .ember{position:absolute;border-radius:50%;background:var(--coral-deep);opacity:.5;z-index:-1;}
+  .e1{width:16px;height:16px;top:20px;right:34px;}
+  .e2{width:10px;height:10px;top:52px;right:70px;}
+  .e3{width:8px;height:8px;top:26px;right:80px;}
+
+  .zone-forest{background:linear-gradient(160deg,var(--forest-bg),var(--forest) 140%);}
+  .zone-forest h2,.zone-forest p{color:var(--forest-deep);}
+  .leaf{position:absolute;background:rgba(255,255,255,0.28);z-index:-1;}
+  .leaf1{width:90px;height:60px;border-radius:60% 40% 55% 45%;top:-24px;right:-16px;}
+  .leaf2{width:46px;height:32px;border-radius:60% 40% 55% 45%;bottom:10px;right:60px;transform:rotate(20deg);}
+
+  /* ---------- footer ---------- */
+  .site-footer{margin-top:36px;text-align:center;color:var(--ink-soft);font-size:14px;}
+
+  /* ---------- dock ---------- */
+  .dock{
+    position:fixed;
+    right:16px;
+    bottom:calc(16px + env(safe-area-inset-bottom,0px));
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    z-index:20;
+  }
+  .dock-btn{
+    display:flex;align-items:center;gap:8px;
+    background:var(--card);
+    border:1px solid var(--line);
+    color:var(--ink);
+    border-radius:999px;
+    padding:10px 14px;
+    font-family:'Gaegu',sans-serif;
+    font-size:15px;
+    box-shadow:var(--shadow);
+    cursor:pointer;
+    position:relative;
+  }
+  .dock-btn:hover{background:var(--cream-2);}
+  .dock-btn:focus-visible{outline:2px solid var(--pool-deep);outline-offset:2px;}
+  .dock-icon{font-size:18px;}
+  .dock-label{white-space:nowrap;}
+  .dock-badge{
+    position:absolute;top:-6px;right:-6px;
+    background:var(--coral-deep);color:#fff;
+    font-size:11px;min-width:18px;height:18px;border-radius:999px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Courier New',monospace;
+    padding:0 4px;
+  }
+  @media (max-width:480px){
+    .dock-label{display:none;}
+    .dock-btn{padding:12px;}
+  }
+
+  /* ---------- modal ---------- */
+  .modal-backdrop{
+    position:fixed;inset:0;background:var(--backdrop);
+    display:none;z-index:30;
+  }
+  .modal-backdrop.is-open{display:block;}
+  .modal{
+    position:fixed;
+    left:50%;top:50%;
+    transform:translate(-50%,-50%);
+    width:min(460px, calc(100vw - 32px));
+    max-height:min(78vh, 640px);
+    background:var(--card);
+    border-radius:20px;
+    box-shadow:var(--shadow);
+    display:none;
+    flex-direction:column;
+    z-index:31;
+    overflow:hidden;
+  }
+  .modal.is-open{display:flex;}
+  .modal-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 20px 12px;
+    border-bottom:1px solid var(--line);
+  }
+  .modal-head h3{font-family:'Do Hyeon',sans-serif;font-weight:400;font-size:20px;margin:0;}
+  .modal-close{
+    background:none;border:none;font-size:20px;color:var(--ink-soft);
+    cursor:pointer;line-height:1;padding:6px;border-radius:8px;
+  }
+  .modal-close:hover{background:var(--cream-2);}
+  .modal-close:focus-visible{outline:2px solid var(--pool-deep);}
+  .modal-body{padding:16px 20px 22px;overflow-y:auto;}
+
+  /* timeline */
+  .timeline{list-style:none;margin:0;padding:0;}
+  .timeline li{
+    display:grid;grid-template-columns:20px 1fr;gap:12px;
+    padding-bottom:18px;position:relative;
+  }
+  .timeline li::before{
+    content:"";width:10px;height:10px;border-radius:50%;
+    background:var(--pool-deep);margin-top:5px;
+  }
+  .timeline li::after{
+    content:"";position:absolute;left:4px;top:16px;bottom:-2px;width:2px;
+    background:var(--line);
+  }
+  .timeline li:last-child::after{display:none;}
+  .timeline .t-time{font-size:12px;color:var(--ink-soft);font-family:'Courier New',monospace;margin-bottom:2px;}
+  .timeline .t-text{font-size:16px;line-height:1.5;}
+  .timeline .t-text.strong{font-weight:700;color:var(--coral-deep);}
+
+  /* rules */
+  .rules-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
+  .rule-item{
+    display:flex;align-items:flex-start;gap:10px;
+    padding:10px 12px;border:1px solid var(--line);border-radius:14px;
+    cursor:pointer;
+  }
+  .rule-item input{margin-top:4px;width:18px;height:18px;accent-color:var(--coral-deep);flex:none;}
+  .rule-emoji{font-size:18px;}
+  .rule-text{font-size:16px;line-height:1.5;flex:1;}
+  .rule-item.is-checked .rule-text{text-decoration:line-through;color:var(--ink-soft);}
+  .rule-promise{font-size:12px;color:var(--coral-deep);font-family:'Courier New',monospace;margin-left:6px;}
+
+  /* cart */
+  .cart-note{font-size:13px;color:var(--ink-soft);margin:0 0 12px;}
+  .cart-list{list-style:none;margin:0 0 14px;padding:0;display:flex;flex-direction:column;gap:8px;}
+  .cart-item{
+    display:flex;align-items:center;gap:10px;
+    padding:9px 10px;border:1px solid var(--line);border-radius:12px;
+  }
+  .cart-item input{width:18px;height:18px;accent-color:var(--pool-deep);flex:none;}
+  .cart-item .c-label{flex:1;font-size:16px;}
+  .cart-item.is-checked .c-label{text-decoration:line-through;color:var(--ink-soft);}
+  .c-tag{
+    font-size:11px;padding:3px 8px;border-radius:999px;
+    font-family:'Courier New',monospace;white-space:nowrap;
+  }
+  .c-tag.buy{background:var(--sky);color:#0d3a42;}
+  .c-tag.home{background:var(--forest-bg);color:var(--forest-deep);}
+  .c-remove{
+    background:none;border:none;color:var(--ink-soft);font-size:16px;cursor:pointer;
+    padding:2px 6px;border-radius:6px;
+  }
+  .c-remove:hover{background:var(--cream-2);color:var(--coral-deep);}
+  .cart-add{display:flex;gap:8px;}
+  .cart-add input[type="text"]{
+    flex:1;padding:10px 12px;border:1px solid var(--line);border-radius:10px;
+    font-family:'Gaegu',sans-serif;font-size:15px;background:var(--cream);color:var(--ink);
+  }
+  .cart-add button{
+    background:var(--pool-deep);color:#fff;border:none;border-radius:10px;
+    padding:0 16px;font-family:'Gaegu',sans-serif;font-size:15px;cursor:pointer;
+  }
+  .cart-add button:hover{background:var(--forest-deep);}
+</style>
+</head>
+<body>
+
+<div class="page">
+  <header class="diary-card">
+    <div class="diary-meta">
+      <span class="no-tag">MINIHOMPY LOG NO.01</span>
+      <span class="date-tag">DATE : 2026.09.20 (일) ~ 09.21 (월)</span>
+    </div>
+    <h1>코딩닌자 <span class="heart">♥</span> 코딩끼끼의<br>여름 풀빌라 브이로그</h1>
+    <p class="hero-sub">충북 진천 · 1박 2일 · 우리 둘만의 힐링 타임</p>
+    <div class="dday-badge" id="ddayBadge">D-4</div>
+    <div class="avatar-row">
+      <div class="sprite-wrap">
+        <div class="sprite-box"><div class="pixel-sprite" id="girlSprite" aria-hidden="true"></div></div>
+        <span class="avatar-label">코딩끼끼</span>
+      </div>
+      <div class="sprite-wrap">
+        <div class="sprite-box"><div class="pixel-sprite" id="boySprite" aria-hidden="true"></div></div>
+        <span class="avatar-label">코딩닌자</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wanderer" id="wanderer" aria-hidden="true">
+      <div class="sprite-wrap"><div class="sprite-box"><div class="pixel-sprite" id="girlSprite2"></div></div></div>
+      <div class="sprite-wrap"><div class="sprite-box"><div class="pixel-sprite" id="boySprite2"></div></div></div>
+    </div>
+    <section class="zone zone-pool">
+      <div class="ember" style="display:none"></div>
+      <svg class="wave" viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M0 10 Q 25 20 50 10 T 100 10 T 150 10 T 200 10 V20 H0 Z"></path></svg>
+      <h2>🏊 수영장</h2>
+      <p>도착하면 짐만 던져두고 바로 풍덩! 음악 크게 틀어놓고 둥둥 떠다니면서 놀기. 물장구는 좋지만… 까불다 다치면 안 돼 (주의사항 4번 참고 ㅎㅎ)</p>
+    </section>
+
+    <section class="zone zone-bbq">
+      <div class="ember e1"></div>
+      <div class="ember e2"></div>
+      <div class="ember e3"></div>
+      <h2>🍖 바베큐존</h2>
+      <p>해 질 때쯤 고기 굽는 냄새 솔솔~ 소고기랑 치즈 지글지글, 술 한 잔 곁들이면 완벽. 배부르게 먹기로 약속한 거 알지? (주의사항 5번)</p>
+    </section>
+
+    <section class="zone zone-forest">
+      <div class="leaf leaf1"></div>
+      <div class="leaf leaf2"></div>
+      <h2>🌿 풀숲 힐링존</h2>
+      <p>수영도 하고 고기도 먹고 나면 여기 앉아서 영화 한 편, 좋아하는 노래 들으면서 아무 생각 없이 늘어지기. 이번 여행의 유일한 목표는 완전한 휴식.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Since 2026.09.16 · 이 다이어리는 코딩닌자가 만들었어요 ♥</p>
+  </footer>
+</div>
+
+<nav class="dock" aria-label="메뉴">
+  <button class="dock-btn" data-modal="calendar" aria-haspopup="dialog"><span class="dock-icon">📅</span><span class="dock-label">일정</span></button>
+  <button class="dock-btn" data-modal="rules" aria-haspopup="dialog"><span class="dock-icon">⚠️</span><span class="dock-label">주의사항</span></button>
+  <button class="dock-btn" data-modal="cart" aria-haspopup="dialog"><span class="dock-icon">🛒</span><span class="dock-label">장바구니</span><span class="dock-badge" id="cartBadge">0</span></button>
+</nav>
+
+<div class="modal-backdrop" id="backdrop"></div>
+
+<div class="modal" id="modal-calendar" role="dialog" aria-modal="true" aria-labelledby="calendar-title" tabindex="-1">
+  <div class="modal-head">
+    <h3 id="calendar-title">📅 일정</h3>
+    <button class="modal-close" data-close aria-label="닫기">✕</button>
+  </div>
+  <div class="modal-body">
+    <ul class="timeline" id="timelineList"></ul>
+  </div>
+</div>
+
+<div class="modal" id="modal-rules" role="dialog" aria-modal="true" aria-labelledby="rules-title" tabindex="-1">
+  <div class="modal-head">
+    <h3 id="rules-title">⚠️ 주의사항</h3>
+    <button class="modal-close" data-close aria-label="닫기">✕</button>
+  </div>
+  <div class="modal-body">
+    <ul class="rules-list" id="rulesList"></ul>
+  </div>
+</div>
+
+<div class="modal" id="modal-cart" role="dialog" aria-modal="true" aria-labelledby="cart-title" tabindex="-1">
+  <div class="modal-head">
+    <h3 id="cart-title">🛒 장바구니</h3>
+    <button class="modal-close" data-close aria-label="닫기">✕</button>
+  </div>
+  <div class="modal-body">
+    <p class="cart-note">복합터미널 이마트 또는 월평동 이마트 트레이더스에서 장보기 · 아직 정하는 중이라 자유롭게 추가/삭제 가능</p>
+    <ul class="cart-list" id="cartList"></ul>
+    <form class="cart-add" id="cartAddForm">
+      <input type="text" id="cartAddInput" placeholder="품목 추가하기" maxlength="30" autocomplete="off">
+      <button type="submit">추가</button>
+    </form>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- pixel sprite ---------- */
+  var PIXEL = 8;
+  function buildSprite(el, grid, palette){
+    var rows = grid.length, cols = grid[0].length;
+    var shadows = [];
+    for(var r=0;r<rows;r++){
+      var row = grid[r];
+      for(var c=0;c<cols;c++){
+        var ch = row[c];
+        if(ch === '.') continue;
+        var color = palette[ch];
+        if(!color) continue;
+        shadows.push((c*PIXEL)+"px "+(r*PIXEL)+"px "+color);
+      }
+    }
+    el.style.width = PIXEL+"px";
+    el.style.height = PIXEL+"px";
+    el.style.background = "transparent";
+    el.style.boxShadow = shadows.join(",");
+    var box = el.parentElement;
+    if(box){
+      box.style.width = (cols*PIXEL)+"px";
+      box.style.height = (rows*PIXEL)+"px";
+    }
+  }
+
+  var boyGrid = [
+    "..HHHHH..",
+    ".HHHHHHH.",
+    "HHFFFFFHH",
+    "HFFEFEFFH",
+    ".FFFFFFF.",
+    "..FFFFF..",
+    "..SSSSS..",
+    "ASSSWSSSA",
+    "ASSSSSSSA",
+    "..PPPPP..",
+    "..PP.PP..",
+    "..BB.BB.."
+  ];
+  var boyPalette = {H:"#2b2320",F:"#ffd9b8",E:"#2b2320",S:"#2c5aa0",W:"#ffffff",A:"#ffd9b8",P:"#2f3a52",B:"#231b16"};
+
+  var girlGrid = [
+    "..HHHHH..",
+    ".HHHHHHH.",
+    "HHFFFFFHH",
+    "HFFEFEFFH",
+    "HFFFFFFFH",
+    "H.FFFFF.H",
+    "..SSSSS..",
+    "ASSSWSSSA",
+    "ASSSSSSSA",
+    ".PPPPPPP.",
+    ".PPPPPPP.",
+    "..L...L..",
+    "..B...B.."
+  ];
+  var girlPalette = {H:"#6b4226",F:"#ffe3c4",E:"#2b2320",S:"#ff8fa3",W:"#ffffff",A:"#ffe3c4",P:"#ffb6c1",L:"#ffe3c4",B:"#3a2e26"};
+
+  var boyEl = document.getElementById("boySprite");
+  var girlEl = document.getElementById("girlSprite");
+  if(boyEl) buildSprite(boyEl, boyGrid, boyPalette);
+  if(girlEl) buildSprite(girlEl, girlGrid, girlPalette);
+
+  var boyEl2 = document.getElementById("boySprite2");
+  var girlEl2 = document.getElementById("girlSprite2");
+  if(boyEl2) buildSprite(boyEl2, boyGrid, boyPalette);
+  if(girlEl2) buildSprite(girlEl2, girlGrid, girlPalette);
+
+  /* ---------- wandering couple: pool <-> bbq ---------- */
+  (function(){
+    var wanderer = document.getElementById("wanderer");
+    var mainEl = document.querySelector("main");
+    var poolZone = document.querySelector(".zone-pool");
+    var bbqZone = document.querySelector(".zone-bbq");
+    if(!wanderer || !mainEl || !poolZone || !bbqZone) return;
+
+    var styleTag = document.createElement("style");
+    styleTag.id = "wander-keyframes";
+    document.head.appendChild(styleTag);
+
+    var reduceMotion = false;
+    try{
+      reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    }catch(e){}
+
+    function place(){
+      var mainRect = mainEl.getBoundingClientRect();
+      var poolRect = poolZone.getBoundingClientRect();
+      var bbqRect = bbqZone.getBoundingClientRect();
+      var wH = wanderer.offsetHeight || 90;
+      var poolY = Math.max(0, (poolRect.top - mainRect.top) + poolRect.height - wH - 14);
+      var bbqY = Math.max(0, (bbqRect.top - mainRect.top) + bbqRect.height - wH - 14);
+      var poolX = Math.max(10, poolRect.width * 0.10);
+      var bbqX = Math.max(10, bbqRect.width * 0.52);
+
+      if(reduceMotion){
+        wanderer.style.animation = "none";
+        wanderer.style.top = poolY + "px";
+        wanderer.style.left = poolX + "px";
+        return;
+      }
+
+      styleTag.textContent =
+        "@keyframes wanderMove {" +
+        "0%{top:" + poolY + "px; left:" + poolX + "px;}" +
+        "22%{top:" + poolY + "px; left:" + poolX + "px;}" +
+        "40%{top:" + bbqY + "px; left:" + bbqX + "px;}" +
+        "60%{top:" + bbqY + "px; left:" + bbqX + "px;}" +
+        "78%{top:" + poolY + "px; left:" + poolX + "px;}" +
+        "100%{top:" + poolY + "px; left:" + poolX + "px;}" +
+        "}";
+      wanderer.style.animation = "none";
+      void wanderer.offsetWidth;
+      wanderer.style.animation = "wanderMove 22s ease-in-out infinite";
+    }
+
+    place();
+    window.addEventListener("load", place);
+    var resizeTimer;
+    window.addEventListener("resize", function(){
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(place, 250);
+    });
+    setTimeout(place, 500);
+  })();
+
+  /* ---------- d-day ---------- */
+  try{
+    var checkin = new Date("2026-09-20T15:00:00+09:00");
+    var checkout = new Date("2026-09-21T11:00:00+09:00");
+    var now = new Date();
+    var badge = document.getElementById("ddayBadge");
+    if(badge){
+      if(now < checkin){
+        var diff = Math.ceil((checkin - now) / 86400000);
+        badge.textContent = "D-" + diff;
+      } else if(now >= checkin && now < checkout){
+        badge.textContent = "여행 중 🏊";
+      } else {
+        badge.textContent = "다녀왔어요 ♥";
+      }
+    }
+  }catch(e){}
+
+  /* ---------- state ---------- */
+  var STORAGE_KEY = "poolvilla-diary-v1";
+
+  var defaultCart = [
+    {id:"cheese", label:"구워 먹는 치즈", tag:"buy", checked:false},
+    {id:"alcohol", label:"술", tag:"buy", checked:false},
+    {id:"mealkit", label:"밀키트 찌개", tag:"buy", checked:false},
+    {id:"ramen", label:"라면 (다음날 아침 해장용)", tag:"buy", checked:false},
+    {id:"fruit", label:"과일", tag:"buy", checked:false},
+    {id:"beef", label:"소고기", tag:"buy", checked:false},
+    {id:"rice", label:"햇반", tag:"buy", checked:false},
+    {id:"kimchi", label:"김치 (집 김치 챙기기)", tag:"home", checked:false}
+  ];
+
+  var defaultRules = [
+    {emoji:"🚫", text:"업무 모드 OFF! 완전한 휴식 준비 완료해야 입장 가능", checked:false},
+    {emoji:"🙅", text:"회사 얘기 금지, 코딩 얘기 절대 금지", checked:false},
+    {emoji:"🙅‍♀️", text:"“아무거나 다 좋아” 금지 — 오늘은 취향 말하기", checked:false},
+    {emoji:"🏊", text:"수영할 때 너무 까불지 않기", checked:false},
+    {emoji:"🍚", text:"밥 많이 먹겠다고 약속하기", checked:false}
+  ];
+
+  var cartItems = defaultCart;
+  var rulesItems = defaultRules;
+
+  function loadState(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return null;
+      return JSON.parse(raw);
+    }catch(e){ return null; }
+  }
+  function saveState(){
+    try{
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({cart:cartItems, rules:rulesItems}));
+    }catch(e){}
+  }
+  var saved = loadState();
+  if(saved && Array.isArray(saved.cart) && saved.cart.length) cartItems = saved.cart;
+  if(saved && Array.isArray(saved.rules) && saved.rules.length === defaultRules.length) rulesItems = saved.rules;
+
+  /* ---------- timeline ---------- */
+  var timeline = [
+    {time:"출발 전", text:"복합터미널 이마트 또는 월평동 이마트 트레이더스에서 장보기 🛒"},
+    {time:"가는 길", text:"커피 한 잔 픽업 ☕"},
+    {time:"09.20(일) 15:00", text:"체크인 — 충북 진천 시기공추 풀빌라 🏡", strong:true},
+    {time:"이후", text:"자유일정 — 수영 🏊 · 영화 🎬 · 노래 🎵 · 바베큐 🍖"},
+    {time:"09.21(월) 11:00", text:"체크아웃 👋", strong:true}
+  ];
+  var timelineEl = document.getElementById("timelineList");
+  if(timelineEl){
+    timeline.forEach(function(item){
+      var li = document.createElement("li");
+      var timeDiv = document.createElement("div");
+      timeDiv.className = "t-time";
+      timeDiv.textContent = item.time;
+      var textDiv = document.createElement("div");
+      textDiv.className = "t-text" + (item.strong ? " strong" : "");
+      textDiv.textContent = item.text;
+      var wrap = document.createElement("div");
+      wrap.appendChild(timeDiv);
+      wrap.appendChild(textDiv);
+      li.appendChild(wrap);
+      timelineEl.appendChild(li);
+    });
+  }
+
+  /* ---------- rules ---------- */
+  var rulesEl = document.getElementById("rulesList");
+  function renderRules(){
+    if(!rulesEl) return;
+    rulesEl.innerHTML = "";
+    rulesItems.forEach(function(item, idx){
+      var li = document.createElement("li");
+      li.className = "rule-item" + (item.checked ? " is-checked" : "");
+      var inputId = "rule-" + idx;
+
+      var checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.id = inputId;
+      checkbox.checked = !!item.checked;
+      checkbox.addEventListener("change", function(){
+        rulesItems[idx].checked = checkbox.checked;
+        saveState();
+        renderRules();
+      });
+
+      var emoji = document.createElement("span");
+      emoji.className = "rule-emoji";
+      emoji.textContent = item.emoji;
+
+      var label = document.createElement("label");
+      label.setAttribute("for", inputId);
+      label.className = "rule-text";
+      label.textContent = item.text;
+      if(item.checked){
+        var promise = document.createElement("span");
+        promise.className = "rule-promise";
+        promise.textContent = "약속 완료!";
+        label.appendChild(promise);
+      }
+
+      li.appendChild(checkbox);
+      li.appendChild(emoji);
+      li.appendChild(label);
+      rulesEl.appendChild(li);
+    });
+  }
+  renderRules();
+
+  /* ---------- cart ---------- */
+  var cartListEl = document.getElementById("cartList");
+  var cartBadgeEl = document.getElementById("cartBadge");
+  var cartAddForm = document.getElementById("cartAddForm");
+  var cartAddInput = document.getElementById("cartAddInput");
+
+  function renderCart(){
+    if(!cartListEl) return;
+    cartListEl.innerHTML = "";
+    cartItems.forEach(function(item){
+      var li = document.createElement("li");
+      li.className = "cart-item" + (item.checked ? " is-checked" : "");
+
+      var checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.checked = !!item.checked;
+      checkbox.setAttribute("aria-label", item.label + " 담기 완료");
+      checkbox.addEventListener("change", function(){
+        item.checked = checkbox.checked;
+        saveState();
+        renderCart();
+      });
+
+      var label = document.createElement("span");
+      label.className = "c-label";
+      label.textContent = item.label;
+
+      var tag = document.createElement("span");
+      tag.className = "c-tag " + item.tag;
+      tag.textContent = item.tag === "home" ? "집에서" : "사야함";
+
+      var remove = document.createElement("button");
+      remove.type = "button";
+      remove.className = "c-remove";
+      remove.setAttribute("aria-label", item.label + " 삭제");
+      remove.textContent = "✕";
+      remove.addEventListener("click", function(){
+        cartItems = cartItems.filter(function(i){ return i !== item; });
+        saveState();
+        renderCart();
+      });
+
+      li.appendChild(checkbox);
+      li.appendChild(label);
+      li.appendChild(tag);
+      li.appendChild(remove);
+      cartListEl.appendChild(li);
+    });
+
+    if(cartBadgeEl){
+      var remaining = cartItems.filter(function(i){ return !i.checked && i.tag === "buy"; }).length;
+      cartBadgeEl.textContent = String(remaining);
+    }
+  }
+  renderCart();
+
+  if(cartAddForm){
+    cartAddForm.addEventListener("submit", function(e){
+      e.preventDefault();
+      var val = (cartAddInput.value || "").trim();
+      if(!val) return;
+      cartItems.push({id:"c" + Date.now(), label:val, tag:"buy", checked:false});
+      saveState();
+      renderCart();
+      cartAddInput.value = "";
+      cartAddInput.focus();
+    });
+  }
+
+  /* ---------- modals ---------- */
+  var backdrop = document.getElementById("backdrop");
+  var modals = {
+    calendar: document.getElementById("modal-calendar"),
+    rules: document.getElementById("modal-rules"),
+    cart: document.getElementById("modal-cart")
+  };
+  var openId = null;
+
+  function openModal(id){
+    var el = modals[id];
+    if(!el) return;
+    closeModal();
+    el.classList.add("is-open");
+    backdrop.classList.add("is-open");
+    openId = id;
+    el.focus();
+  }
+  function closeModal(){
+    if(!openId) return;
+    var el = modals[openId];
+    if(el) el.classList.remove("is-open");
+    backdrop.classList.remove("is-open");
+    openId = null;
+  }
+
+  document.querySelectorAll(".dock-btn").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      openModal(btn.getAttribute("data-modal"));
+    });
+  });
+  document.querySelectorAll("[data-close]").forEach(function(btn){
+    btn.addEventListener("click", closeModal);
+  });
+  backdrop.addEventListener("click", closeModal);
+  document.addEventListener("keydown", function(e){
+    if(e.key === "Escape") closeModal();
+  });
+})();
+</script>
+</body>
+</html>
