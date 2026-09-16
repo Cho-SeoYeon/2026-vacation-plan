@@ -144,50 +144,117 @@
   @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);}}
   .avatar-label{font-size:15px;color:var(--ink-soft);}
 
-  /* ---------- zones ---------- */
-  main{display:flex;flex-direction:column;gap:18px;margin-top:22px;position:relative;}
-  .wanderer{
-    position:absolute;
-    left:0;top:0;
-    display:flex;
-    align-items:flex-end;
-    gap:6px;
-    z-index:5;
-    pointer-events:none;
-  }
-  .zone{
-    border-radius:22px;
-    padding:26px 22px;
+  /* ---------- scene ---------- */
+  main{display:flex;flex-direction:column;gap:16px;margin-top:22px;position:relative;}
+  .scene{
     position:relative;
+    width:100%;
+    aspect-ratio:16/11;
+    border-radius:26px;
     overflow:hidden;
     box-shadow:var(--shadow);
-    isolation:isolate;
+    background:linear-gradient(to bottom, var(--sky) 0%, var(--sky) 56%, #cdebb0 56%, #a9d888 100%);
   }
-  .zone h2{font-size:22px;margin:0 0 10px;}
-  .zone p{margin:0;font-size:17px;line-height:1.65;max-width:46ch;}
-  .zone-pool{background:linear-gradient(165deg,var(--sky),var(--pool) 120%);color:#0d3a42;}
-  .zone-pool h2,.zone-pool p{color:#0d3a42;}
-  .zone-pool::before,.zone-pool::after{
-    content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,0.4);z-index:-1;
+  :root[data-theme="dark"] .scene{background:linear-gradient(to bottom, var(--sky) 0%, var(--sky) 56%, #26361f 56%, #1c2a17 100%);}
+  .sun{
+    position:absolute; top:8%; right:9%;
+    width:11%; aspect-ratio:1; border-radius:50%;
+    background:#ffd76a;
+    box-shadow:0 0 30px 10px rgba(255,215,106,0.55);
   }
-  .zone-pool::before{width:120px;height:120px;top:-40px;right:-30px;}
-  .zone-pool::after{width:70px;height:70px;bottom:-20px;right:70px;background:rgba(255,255,255,0.25);}
-  .wave{position:absolute;left:0;right:0;bottom:0;height:34px;z-index:-1;}
-  .wave path{fill:rgba(255,255,255,0.35);}
+  .cloud{position:absolute; background:rgba(255,255,255,0.8); border-radius:999px;}
+  .cloud1{width:15%;height:6%;top:14%;left:8%;}
+  .cloud1::before{content:"";position:absolute;left:22%;top:-55%;width:60%;height:120%;background:inherit;border-radius:999px;}
+  .cloud2{width:11%;height:5%;top:22%;left:24%;opacity:.85;}
 
-  .zone-bbq{background:linear-gradient(160deg,var(--cream-2),var(--coral) 135%);}
-  .zone-bbq h2,.zone-bbq p{color:#4a2416;}
-  :root[data-theme="dark"] .zone-bbq h2,:root[data-theme="dark"] .zone-bbq p{color:#3a1c10;}
-  .ember{position:absolute;border-radius:50%;background:var(--coral-deep);opacity:.5;z-index:-1;}
-  .e1{width:16px;height:16px;top:20px;right:34px;}
-  .e2{width:10px;height:10px;top:52px;right:70px;}
-  .e3{width:8px;height:8px;top:26px;right:80px;}
+  .tree{position:absolute;bottom:0;z-index:1;}
+  .tree .trunk{width:14%;height:22%;background:#6b4a2f;margin:0 auto;border-radius:3px;}
+  .tree .leaves{width:100%;aspect-ratio:1;border-radius:50%;background:var(--forest);margin-bottom:-6%;}
+  .tree-l1{left:2%;width:11%;}
+  .tree-l2{left:9%;width:8%;opacity:.9;}
+  .tree-r1{right:2%;width:11%;}
+  .tree-r2{right:9%;width:8%;opacity:.9;}
 
-  .zone-forest{background:linear-gradient(160deg,var(--forest-bg),var(--forest) 140%);}
-  .zone-forest h2,.zone-forest p{color:var(--forest-deep);}
-  .leaf{position:absolute;background:rgba(255,255,255,0.28);z-index:-1;}
-  .leaf1{width:90px;height:60px;border-radius:60% 40% 55% 45%;top:-24px;right:-16px;}
-  .leaf2{width:46px;height:32px;border-radius:60% 40% 55% 45%;bottom:10px;right:60px;transform:rotate(20deg);}
+  .pool-area{position:absolute;left:6%;bottom:6%;width:34%;z-index:2;}
+  .pool-water{
+    position:relative;width:100%;aspect-ratio:16/9;border-radius:50%;
+    background:linear-gradient(160deg,#8fe1ef,var(--pool) 70%);
+    box-shadow:inset 0 6px 14px rgba(13,58,66,0.25), 0 4px 0 rgba(255,255,255,0.5);
+    overflow:hidden;
+  }
+  .pool-water::before,.pool-water::after{
+    content:"";position:absolute;left:8%;right:8%;height:3px;background:rgba(255,255,255,0.55);border-radius:999px;
+  }
+  .pool-water::before{top:38%;}
+  .pool-water::after{top:56%;}
+  .pool-ring{
+    position:absolute;width:20%;aspect-ratio:1;border-radius:50%;
+    border:6px solid #ff8a65;background:transparent;
+    top:28%;left:20%;
+    box-shadow:0 3px 4px rgba(0,0,0,0.15);
+  }
+  .pool-label{position:absolute;left:50%;bottom:-14px;transform:translate(-50%,100%);white-space:nowrap;}
+
+  .bbq-area{position:absolute;right:8%;bottom:6%;width:26%;z-index:2;text-align:center;}
+  .grill{
+    width:70%;margin:0 auto;aspect-ratio:1.4;border-radius:10px 10px 4px 4px;
+    background:#3a3532;position:relative;
+  }
+  .grill::before{content:"";position:absolute;left:10%;right:10%;top:22%;height:10%;background:#5a534d;border-radius:3px;}
+  .grill-legs{width:76%;margin:0 auto;height:16%;position:relative;}
+  .grill-legs::before,.grill-legs::after{content:"";position:absolute;top:0;width:10%;height:100%;background:#2b2723;}
+  .grill-legs::before{left:6%;transform:skewX(-12deg);}
+  .grill-legs::after{right:6%;transform:skewX(12deg);}
+  .flame{
+    position:absolute; left:50%; bottom:34%; transform:translateX(-50%);
+    width:22%; aspect-ratio:.7;
+    background:radial-gradient(circle at 50% 80%, #fff2b0, var(--coral) 55%, var(--coral-deep) 100%);
+    border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .flame{animation:flicker 1.6s ease-in-out infinite;}
+    .smoke1{animation:rise 3.2s ease-in infinite;}
+    .smoke2{animation:rise 3.2s ease-in infinite 1.1s;}
+  }
+  @keyframes flicker{0%,100%{transform:translateX(-50%) scale(1);}50%{transform:translateX(-50%) scale(0.88,1.08);}}
+  .smoke{position:absolute;border-radius:50%;background:rgba(255,255,255,0.55);}
+  .smoke1{width:8%;aspect-ratio:1;left:44%;bottom:78%;}
+  .smoke2{width:6%;aspect-ratio:1;left:52%;bottom:88%;opacity:.7;}
+  @keyframes rise{0%{transform:translateY(0);opacity:.6;}100%{transform:translateY(-70%);opacity:0;}}
+  .bbq-label{display:inline-block;margin-top:10px;}
+
+  .scene-label{
+    display:inline-flex;align-items:center;gap:4px;
+    background:var(--card);
+    padding:4px 10px;border-radius:999px;
+    font-size:13px;color:var(--ink);
+    box-shadow:var(--shadow);
+    white-space:nowrap;
+  }
+  .scene-caption{margin:0;font-size:16px;line-height:1.7;color:var(--ink-soft);text-align:center;padding:0 4px;}
+
+  /* wandering couple inside the scene */
+  .wanderer{
+    position:absolute;
+    left:26%;bottom:10%;
+    display:flex;
+    align-items:flex-end;
+    gap:4px;
+    z-index:5;
+    pointer-events:none;
+    transform:translate(-50%,0);
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .wanderer{animation:wanderScene 20s ease-in-out infinite;}
+  }
+  @keyframes wanderScene{
+    0%{left:26%;bottom:10%;}
+    22%{left:26%;bottom:10%;}
+    40%{left:74%;bottom:9%;}
+    60%{left:74%;bottom:9%;}
+    78%{left:26%;bottom:10%;}
+    100%{left:26%;bottom:10%;}
+  }
 
   /* ---------- footer ---------- */
   .site-footer{margin-top:36px;text-align:center;color:var(--ink-soft);font-size:14px;}
@@ -356,31 +423,35 @@
   </header>
 
   <main>
-    <div class="wanderer" id="wanderer" aria-hidden="true">
-      <div class="sprite-wrap"><div class="sprite-box"><div class="pixel-sprite" id="girlSprite2"></div></div></div>
-      <div class="sprite-wrap"><div class="sprite-box"><div class="pixel-sprite" id="boySprite2"></div></div></div>
+    <div class="scene">
+      <div class="sun"></div>
+      <div class="cloud cloud1"></div>
+      <div class="cloud cloud2"></div>
+      <div class="tree tree-l1"><div class="leaves"></div><div class="trunk"></div></div>
+      <div class="tree tree-l2"><div class="leaves"></div><div class="trunk"></div></div>
+      <div class="tree tree-r1"><div class="leaves"></div><div class="trunk"></div></div>
+      <div class="tree tree-r2"><div class="leaves"></div><div class="trunk"></div></div>
+
+      <div class="pool-area">
+        <div class="pool-water"><div class="pool-ring"></div></div>
+        <span class="scene-label pool-label">🏊 수영장</span>
+      </div>
+
+      <div class="bbq-area">
+        <div class="smoke smoke1"></div>
+        <div class="smoke smoke2"></div>
+        <div class="flame"></div>
+        <div class="grill"></div>
+        <div class="grill-legs"></div>
+        <span class="scene-label bbq-label">🍖 바베큐존</span>
+      </div>
+
+      <div class="wanderer" id="wanderer" aria-hidden="true">
+        <div class="sprite-wrap"><div class="sprite-box"><div class="pixel-sprite" id="girlSprite2"></div></div></div>
+        <div class="sprite-wrap"><div class="sprite-box"><div class="pixel-sprite" id="boySprite2"></div></div></div>
+      </div>
     </div>
-    <section class="zone zone-pool">
-      <div class="ember" style="display:none"></div>
-      <svg class="wave" viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M0 10 Q 25 20 50 10 T 100 10 T 150 10 T 200 10 V20 H0 Z"></path></svg>
-      <h2>🏊 수영장</h2>
-      <p>도착하면 짐만 던져두고 바로 풍덩! 음악 크게 틀어놓고 둥둥 떠다니면서 놀기. 물장구는 좋지만… 까불다 다치면 안 돼 (주의사항 4번 참고 ㅎㅎ)</p>
-    </section>
-
-    <section class="zone zone-bbq">
-      <div class="ember e1"></div>
-      <div class="ember e2"></div>
-      <div class="ember e3"></div>
-      <h2>🍖 바베큐존</h2>
-      <p>해 질 때쯤 고기 굽는 냄새 솔솔~ 소고기랑 치즈 지글지글, 술 한 잔 곁들이면 완벽. 배부르게 먹기로 약속한 거 알지? (주의사항 5번)</p>
-    </section>
-
-    <section class="zone zone-forest">
-      <div class="leaf leaf1"></div>
-      <div class="leaf leaf2"></div>
-      <h2>🌿 풀숲 힐링존</h2>
-      <p>수영도 하고 고기도 먹고 나면 여기 앉아서 영화 한 편, 좋아하는 노래 들으면서 아무 생각 없이 늘어지기. 이번 여행의 유일한 목표는 완전한 휴식.</p>
-    </section>
+    <p class="scene-caption">🌿 짐 풀자마자 풍덩 빠졌다가, 배고프면 바베큐존으로 건너가서 고기 굽고, 그러다 나무 그늘에 앉아서 영화랑 노래 들으며 늘어지기. 물장구칠 때 너무 까불지 않기, 배부르게 먹기로 한 약속은 꼭 지키기! (주의사항 참고)</p>
   </main>
 
   <footer class="site-footer">
@@ -466,7 +537,7 @@
     ".HHHHHHH.",
     "HHFFFFFHH",
     "HFFEFEFFH",
-    ".FFFFFFF.",
+    ".FFMMMFF.",
     "..FFFFF..",
     "..SSSSS..",
     "ASSSWSSSA",
@@ -475,14 +546,14 @@
     "..PP.PP..",
     "..BB.BB.."
   ];
-  var boyPalette = {H:"#2b2320",F:"#ffd9b8",E:"#2b2320",S:"#2c5aa0",W:"#ffffff",A:"#ffd9b8",P:"#2f3a52",B:"#231b16"};
+  var boyPalette = {H:"#2b2320",F:"#ffd9b8",E:"#2b2320",M:"#b04a2e",S:"#2c5aa0",W:"#ffffff",A:"#ffd9b8",P:"#2f3a52",B:"#231b16"};
 
   var girlGrid = [
     "..HHHHH..",
     ".HHHHHHH.",
     "HHFFFFFHH",
     "HFFEFEFFH",
-    "HFFFFFFFH",
+    "HFFMMMFFH",
     "H.FFFFF.H",
     "..SSSSS..",
     "ASSSWSSSA",
@@ -492,7 +563,7 @@
     "..L...L..",
     "..B...B.."
   ];
-  var girlPalette = {H:"#6b4226",F:"#ffe3c4",E:"#2b2320",S:"#ff8fa3",W:"#ffffff",A:"#ffe3c4",P:"#ffb6c1",L:"#ffe3c4",B:"#3a2e26"};
+  var girlPalette = {H:"#6b4226",F:"#ffe3c4",E:"#2b2320",M:"#e6667e",S:"#ff8fa3",W:"#ffffff",A:"#ffe3c4",P:"#ffb6c1",L:"#ffe3c4",B:"#3a2e26"};
 
   var boyEl = document.getElementById("boySprite");
   var girlEl = document.getElementById("girlSprite");
@@ -503,64 +574,6 @@
   var girlEl2 = document.getElementById("girlSprite2");
   if(boyEl2) buildSprite(boyEl2, boyGrid, boyPalette);
   if(girlEl2) buildSprite(girlEl2, girlGrid, girlPalette);
-
-  /* ---------- wandering couple: pool <-> bbq ---------- */
-  (function(){
-    var wanderer = document.getElementById("wanderer");
-    var mainEl = document.querySelector("main");
-    var poolZone = document.querySelector(".zone-pool");
-    var bbqZone = document.querySelector(".zone-bbq");
-    if(!wanderer || !mainEl || !poolZone || !bbqZone) return;
-
-    var styleTag = document.createElement("style");
-    styleTag.id = "wander-keyframes";
-    document.head.appendChild(styleTag);
-
-    var reduceMotion = false;
-    try{
-      reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    }catch(e){}
-
-    function place(){
-      var mainRect = mainEl.getBoundingClientRect();
-      var poolRect = poolZone.getBoundingClientRect();
-      var bbqRect = bbqZone.getBoundingClientRect();
-      var wH = wanderer.offsetHeight || 90;
-      var poolY = Math.max(0, (poolRect.top - mainRect.top) + poolRect.height - wH - 14);
-      var bbqY = Math.max(0, (bbqRect.top - mainRect.top) + bbqRect.height - wH - 14);
-      var poolX = Math.max(10, poolRect.width * 0.10);
-      var bbqX = Math.max(10, bbqRect.width * 0.52);
-
-      if(reduceMotion){
-        wanderer.style.animation = "none";
-        wanderer.style.top = poolY + "px";
-        wanderer.style.left = poolX + "px";
-        return;
-      }
-
-      styleTag.textContent =
-        "@keyframes wanderMove {" +
-        "0%{top:" + poolY + "px; left:" + poolX + "px;}" +
-        "22%{top:" + poolY + "px; left:" + poolX + "px;}" +
-        "40%{top:" + bbqY + "px; left:" + bbqX + "px;}" +
-        "60%{top:" + bbqY + "px; left:" + bbqX + "px;}" +
-        "78%{top:" + poolY + "px; left:" + poolX + "px;}" +
-        "100%{top:" + poolY + "px; left:" + poolX + "px;}" +
-        "}";
-      wanderer.style.animation = "none";
-      void wanderer.offsetWidth;
-      wanderer.style.animation = "wanderMove 22s ease-in-out infinite";
-    }
-
-    place();
-    window.addEventListener("load", place);
-    var resizeTimer;
-    window.addEventListener("resize", function(){
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(place, 250);
-    });
-    setTimeout(place, 500);
-  })();
 
   /* ---------- d-day ---------- */
   try{
